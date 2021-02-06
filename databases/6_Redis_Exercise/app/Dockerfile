@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.9
 
 # Python Requirements installation
 ADD ./requirements.txt requirements.txt
