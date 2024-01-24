@@ -8,3 +8,4 @@ COPY hello.sh /opt/hello.sh
 RUN chmod +x /opt/hello.sh
 
 CMD ["bash", "/opt/hello.sh"]
+
