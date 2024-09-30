@@ -10,7 +10,7 @@ info: |
   made for Data Science Retreat
   by Jacopo Farina
 
-  Using [Sli.dev](https://sli.dev)
+  Based on [Sli.dev](https://sli.dev)
 # apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/features/drawing
@@ -220,7 +220,7 @@ executed in many different containers
 
 Let’s say we want to check how this code behaves in different Python versions:
 
-```python
+```python {monaco}
 print(f'this is {3+2}')
 ```
 installing Python 3.5 and 3.12 on the same machine is boring and can be messy.
@@ -384,8 +384,11 @@ now `echo $BLA` inside the container will show the value, every process in the
 # Intermission: networking
 
 Before seeing how Docker handles networking, let's see the basic concepts of
- how to represent connections and services *in practice*. This is **essential**
- knowledge even outside Docker. We'll skip many details for simplicity.
+ how to represent connections and services *in practice*.
+
+This is **essential** knowledge even outside Docker.
+
+We'll skip many details for simplicity.
 
 ---
 
@@ -429,7 +432,7 @@ When you run an application, e.g. a web app, you can then connect in different
 A few tips:
 
 * You can rent a domain name to map to your IP address
-* For testing, tools like `ngrok` or `bore` expose temporarily something local
+* For testing, tools like `ngrok` or `bore` temporarily expose something local
  to a public address
 * Many servers need to be **told** to listen on all available IPs. `0.0.0.0` is
  a "special" IP to indicate that every available interface is being used.
@@ -532,269 +535,265 @@ The same instance can be used via the Python library, connecting to the
 
 ---
 
+# Docker Compose
 
+Often you want to run multiple containers together:
 
-# Motions
+* start and stop all of them in a single command
+* specify an order to start them (e.g. first a database, then an app using it)
+* see the log of all of them combined
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+for that, writing multiple long `docker run` commands is tedious and
+ error prone.
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+Docker compose automates this. You can describe the containers of your setup in
+ a `compose.yaml` file. Then, commands like `docker compose up` and
+ `docker compose down` start and stop them together.
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
+See a few examples https://github.com/docker/awesome-compose/tree/master
 
 ---
 
-# LaTeX
+Example: Flask + Redis
 
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
+https://github.com/docker/awesome-compose/tree/master/flask-redis
 
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 0,-231,0,0
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
+```yaml  {monaco}
+services:
+  redis:
+    image: redislabs/redismod
+    ports:
+      - '6379:6379'
+  web:
+    build:
+      context: .
+      target: builder
+    # flask requires SIGINT to stop gracefully
+    # (default stop signal from Compose is SIGTERM)
+    stop_signal: SIGINT
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
 ```
 
 ---
-layout: center
-class: text-center
+
+# Kubernetes
+
+Kubernetes (K8s) behaves as a sort of "distributed Docker", used in complex setups to
+ run containers in a cluster.
+
+It uses a YAML definition of the configuration you want to deploy. You can test
+it using tools like `minikube`.
+
+Examples of what K8s can do:
+
+* **Cronjobs**: run a container according to a schedule
+* **Load balancing**: run multiple copies of a container, split the workload
+* **Secrets**: make tokens and config available at runtime
+* **Autoscaling**: rent machines from AWS or similar when needed
+* **Authentication/namespaces**: handle multiple users with different permissions
+ and quotas (e.g. how much RAM per team)
+
 ---
 
-# Learn More
+# Building an image
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+So far, we **used** images from the docker hub.
 
-<PoweredBySlidev mt-10 />
+There are many for the most common open source tools and libraries, but what
+if you want to **create** one with your own code?
+
+That way, you can allow another user (or yourself) to run it using a single
+ command, without worrying about they having different versions of the
+ dependencies.
+
+It can also be useful during development, to quickly build and test some code
+ in a reproducible way.
+
+---
+
+# Building an image
+
+Docker allows you to build an image, and run containers based on that.
+
+An image can be used locally, but can also be published on the Docker Hub or
+private registries.
+It’s possible to snapshot a container FS to get an image, but not recommended
+ because it’s much harder to maintain and rebuild.
+
+Instead, the traditional way is to define a `Dockerfile`.
+
+This file is basically a recipe to build an image, a list of steps which are
+ executed one by one.
+
+---
+
+# Dockerfile: an example
+
+```dockerfile {monaco}
+
+FROM ubuntu:24.04
+
+RUN apt-get -y update && \
+    apt-get -y install python3
+
+COPY hello.py /opt/hello.py
+
+CMD ["python3", "/opt/hello.py"]
+
+```
+
+you can find this example under `example_dockerfile_1`
+
+Build it by going to the folder and running `docker build -t myimage:0.1 .`
+
+Run it with `docker run myimage:0.1`
+
+You can now see it with `docker images`
+
+Using `docker tag` you can assign extra names to the same images, same principle
+ as git branches. Images also have a unique hash based on the content and can be
+ used instead of a tag, just like git commit hashes.
+
+---
+
+# Let's dockerize a Flask app
+
+Let's implement a Flask app that will use NumPy to generate a random number and
+show it in a web page.
+
+This requires:
+
+1. Getting an idea of how a general web app works
+2. Handling dependencies (numpy)
+3. optional: Using venv to quickly test it without docker
+4. Wrap everything inside a Dockerfile, build the image, and run the container
+
+---
+
+# HTTP - HyperText Transfer Protocol
+
+A browser or client sends a **request** and the server replies with a
+ **response**.
+
+You can peek on them in the browser (right click -> `inspect`, the network tab).
+
+Requests have:
+
+* **headers**: metadata about the request itself (cookies, language, etc.)
+* **verb**: the type of request. GET, POST, PUT, etc.
+* **payload** (or **body**): data you send in a request, if any
+
+Responses also have headers, and they have a **status code**:
+
+> 2xx for OK, 4xx for client error, 5xx for server error, 3xx for redirect
+
+Usually the browser requests a page, and the page content triggers further
+ requests for resources (images, scripts, etc.) listed in the page.
+
+Requests are always intiated by the client, but it's possible to open a
+ websocket or poll continuously to let the server push data too, e.g. for chat
+ applications or auto-refresh.
+
+---
+
+# Create a venv, install Flask
+
+```bash  {monaco}
+# create the venv
+python3 -v venv .venv
+
+# activate it
+source .venv/bin/activate
+
+# install Flask (will affect the active venv)
+python3 -m pip install Flask
+```
+
+you can check which "python" will be used with `type python`.
+
+Now if you open a python shell and run `import flask` it will work.
+
+You can see the list of installed libraries with `python3 -m pip list`. This
+ shows not only Flask but other libraries that are indirect dependencies.
+
+---
+
+# A minimal Flask app
+
+In `minimal.py`:
+
+```python  {monaco}
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.get("/a")
+def hello_world():
+    return "<p>Hello, <strong>World!</strong></p>"
+
+```
+
+now run `flask --app minimal run` and you can see it in the browser.
+
+---
+
+# requirements.txt
+
+We need to track the libraries used by our app and their versions.
+
+Tools like `Poetry` or `PDM` can handle that for you in a `pyproject.toml`, and
+ automate most common operations. Unfortunately Python is quite messy when it
+ comes to packaging.
+
+Without extra tools, a simple solution is to use `venv` and list the
+dependencies in a `requirements.txt` file.
+
+write it:
+
+`python3 -m pip list --format freeze > requirements.txt`
+
+use it:
+
+`python3 -m pip install -r requirements.txt`
+
+---
+
+# Add NumPy
+
+As an example of a "data science-y" library, add NumPy
+
+```python {monaco}
+from flask import Flask
+import numpy as np
+
+app = Flask(__name__)
+
+@app.get("/random")
+def random():
+    return f"Random number: {np.random.random()}"
+```
+---
+
+# Dockerize it
+
+Now we can replicate the setup in a Dockerfile, to build an image with all the
+logic.
+
+Try to write the Dockerfile yourself
+
+Tips:
+* For a starting image you can use python, or ubuntu and then install python
+* You don’t need the virtualenv, install on the whole container because the
+ isolation is already provided by Docker. Use the `requirements.txt` directly
+* Comment out part of the Dockerfile, build so far and run bash on the image
+ for troubleshooting
+* The `--host` flag for Flask is not always needed. Use `docker exec` and then
+ `curl` to call the app from inside the container and figure out if it works
+ there
+* On a production setup, we would use guvicorn or similar. Not relevant here,
+ it adds a bit of complexity but the logic remains the same

@@ -5,4 +5,8 @@ dist
 .vite-inspect
 .remote-assets
 components.d.ts
+# PDF output
 *.pdf
+
+# pycache in subfolders
+**/__pycache__/
