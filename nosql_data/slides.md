@@ -112,7 +112,7 @@ CSV cons:
 JSON pros:
 * very easy to read/write manually
 * can handle structured data (e.g. the capitals before)
-* ubiquous, it's the lingua franca of the wb
+* ubiquitous, it's the lingua franca of the wb
 
 JSON cons:
 * cannot be handled directly by Excel
@@ -199,7 +199,7 @@ A binary format does that, the main drawbacks are that it's not human readable
 # Many binary formats
 
 * Thrift
-* Avro (Hadoon, Spark, Kafka)
+* Avro (Hadoop, Spark, Kafka)
 * Protobuf/Flatbuf (Pokemon Go, vectorial maps)
 * Parquet (Hadoop, Spark, Snowflake, Flixbus)
 * Arrow (new one, often combined with Parquet, focuses on computation in
@@ -210,7 +210,7 @@ And many many more, we are going to see **Avro** and **Parquet**, right now
 
 Arrow is used implicitly within Parquet, it's an extremely interesting
  technology because it tries to process data without changing format, and is
- designed to take advantage of modern hardware (multicore and somtimes GPUs).
+ designed to take advantage of modern hardware (multicore and sometimes GPUs).
 
 Tools like Polars (and Pandas after 2.0) can take advantage of it.
 
@@ -281,7 +281,8 @@ Pandas (and Polars and DuckDB) can read/write it provided you installed
 
 ### Why do we care about it?
 
-The difference lies in how quick it is to access a single row or a single colums.
+The difference lies in how quick it is to access a single row or a single
+ columns.
 
 * **Row layout** makes it easy to access a row, to read/write a single entity.
   * E-commerce

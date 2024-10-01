@@ -166,7 +166,7 @@ laptops!
 
 An image is a template to create containers to run. Most importantly, it
 contains all the files visible to the running app (including libraries and
-intepreters).
+interpreters).
 
 Roughly, you can see the image as a complete copy of the disk of a computer
 with some app already installed and configured and ready to use.
@@ -185,7 +185,7 @@ executed in many different containers
  their own state.
 
 > The image defines the initial state of a container and does
- not change across excutions.
+ not change across executions.
 
 ---
 
@@ -260,7 +260,8 @@ Use:
   * `--name` to give it a name (if not, it uses a random one)
 * `docker ps` to see the running containers
 * `docker stop / kill / rm` to stop and delete the containers
-* `docker inspect` to see all the details (lots of details, useful for troubleshooting)
+* `docker inspect` to see all the details (lots of details, useful for
+ troubleshooting)
 * `docker system prune` can delete all stopped containers to save space
 
 ---
@@ -327,7 +328,7 @@ metadata, if needed use `chown` and `chmod` to fix them
 
 # See the output
 
-The `-it` flag starts an intractive container, while `-d` starts one in
+The `-it` flag starts an interactive container, while `-d` starts one in
  background.
 
 You can try it easily with
@@ -473,11 +474,9 @@ This is very useful when doing frontend development or to share files.
 Try it locally and in Docker, you should be able to use `-p` to make it visible
  on the
 
-Note: there are many tools like this from Python, see https://docs.python.org/3/library/cmdline.html
+Note: there are many tools like this from Python, if you are curious
+ https://docs.python.org/3/library/cmdline.html
 
----
-dragPos:
-  square: 56,1888,0,0
 ---
 
 # A more complete example: Postgres
@@ -648,7 +647,7 @@ show it in a web page.
 This requires:
 
 1. Getting an idea of how a general web app works
-2. Handling dependencies (numpy)
+2. Handling dependencies (NumPy)
 3. optional: Using venv to quickly test it without docker
 4. Wrap everything inside a Dockerfile, build the image, and run the container
 
@@ -674,7 +673,7 @@ Responses also have headers, and they have a **status code**:
 Usually the browser requests a page, and the page content triggers further
  requests for resources (images, scripts, etc.) listed in the page.
 
-Requests are always intiated by the client, but it's possible to open a
+Requests are always initiated by the client, but it's possible to open a
  websocket or poll continuously to let the server push data too, e.g. for chat
  applications or auto-refresh.
 

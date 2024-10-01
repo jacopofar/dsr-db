@@ -28,6 +28,8 @@ Container commands:
   * `docker run X Y` runs command Y on image X, if omitted runs the default
    command defined in image metadata
   * `docker system prune` removes unused images and containers
+  * `docker inspect X` see lots of details about a container
+
 Build commands:
 
 * `docker build .` builds an image from the Dockerfile in this folder
