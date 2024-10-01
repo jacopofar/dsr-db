@@ -45,25 +45,18 @@ Data Science Retreat
 
 Jacopo Farina
 
-<!-- <div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div> -->
+---
 
-<!-- <div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div> -->
+# Before starting
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+These slides are all in the repository, based on Sli.dev.
+
+In the `Release` page in Github you can find them as a PDF.
+
+In the repo you can also find the code shown in the slides as separate files to
+ execute immediately.
+
+For Docker, there's a `cheatsheet_dockr.md` file in the project root.
 
 ---
 
@@ -80,21 +73,7 @@ You try a library or a different version of Python, and:
   install X on a new machine, it’s not the same you used in
   development, and may break
 
-<!-- <br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why) -->
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-
-
-<!--
-Here is another comment.
--->
+It gets even worse when you have multiple languages and tools
 
 ---
 
@@ -140,10 +119,10 @@ monitor.
   *container* (sometimes called *jail*)
 * Can be used during development and/or production
 * Prevents apps access to the "real" filesystem, network and processes
-* Allows reproducible build and execution (no *works on my
-machine* ™)
-* Available for macOS and Windows using a virtual machine
-* There is also a native Docker for Windows, but is not that common
+* Allows reproducible build and execution (no <u>*works on my
+machine* ™</u>)
+* Available for macOS and Windows, in that case it runs a Linux virtual machine
+* There is also a native Docker for Windows, but it is not that common
 
 ---
 
@@ -155,15 +134,15 @@ The problem is very common, many came with solutions to it:
   cover all libraries.
 * ***Nix*** is similar in scope, but focuses on reproducibility alone rather
   than isolation
-* ***virtualenv*** similar to Conda, included in Python, no curated list of
-  libraries
+* ***venv*** similar to Conda, included in Python, no curated list of
+  libraries. We'll try it later
 
 ...and many more.
 
 Docker is one of the **most common** solutions and tries to be **universal**.
 
 Additionally, *containers* are the foundation of tools like Kubernetes or
- Compose, extremely common in enterprise environments.
+ Compose, extremely common in enterprise environments. We'll briefly see.
 
 ---
 
@@ -176,7 +155,7 @@ The daemon (dockerd) is the process that manages all docker resources
 The Docker client (docker) is the primary way that Docker users interact with
 the Daemon
 * Can run directly on non-Linux system
-* Communicate with the engine via HTTP
+* Communicates with the engine via HTTP
 
 In our case, the daemon and the client will be on the same machine: our
 laptops!
@@ -189,8 +168,8 @@ An image is a template to create containers to run. Most importantly, it
 contains all the files visible to the running app (including libraries and
 intepreters).
 
-Roughly, you can see the image as a copy of the disk of a computer with some
-app installed and ready to use.
+Roughly, you can see the image as a complete copy of the disk of a computer
+with some app already installed and configured and ready to use.
 
 There are repositories of useful public images, for example at hub.docker.com
 and **private** repositories for companies.
