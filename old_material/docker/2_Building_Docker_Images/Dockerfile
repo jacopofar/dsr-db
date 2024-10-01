@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM python:3.5
 
 RUN apt-get -y update && \
 	apt-get -y install wget

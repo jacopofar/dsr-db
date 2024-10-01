@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist
+*.local
+.vite-inspect
+.remote-assets
+components.d.ts
+# PDF output
+*.pdf
+
+# pycache in subfolders
+**/__pycache__/
