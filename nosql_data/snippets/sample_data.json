@@ -1,0 +1,19 @@
+[
+    {
+        "country": "France",
+        "capital": "Paris",
+        "continent": "Europe",
+        "population": 67000000
+    },
+    {
+        "country": "South Africa",
+        "capital": ["Pretoria", "Bloemfontein", "Cape Town"],
+        "continent": "Africa",
+        "population": 55000000
+    },
+    {
+        "country": "Nauru",
+        "continent": "Oceania",
+        "population": 10000
+    }
+]
