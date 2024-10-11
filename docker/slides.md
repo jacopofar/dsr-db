@@ -685,7 +685,7 @@ Requests are always initiated by the client, but it's possible to open a
 
 ```bash  {monaco}
 # create the venv
-python3 -v venv .venv
+python3 -m venv .venv
 
 # activate it
 source .venv/bin/activate
