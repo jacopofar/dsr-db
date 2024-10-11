@@ -576,6 +576,8 @@ Examples of what K8s can do:
 * **Authentication/namespaces**: handle multiple users with different permissions
  and quotas (e.g. how much RAM per team)
 
+You can use `minikube` to try it locally
+
 ---
 
 # Building an image
