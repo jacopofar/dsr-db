@@ -56,7 +56,7 @@ In the `Release` page in Github you can find them as a PDF.
 In the repo you can also find the code shown in the slides as separate files to
  execute immediately.
 
-For Docker, there's a `cheatsheet_dockr.md` file in the project root.
+For Docker, there's a `cheatsheet_docker.md` file in the project root.
 
 ---
 
