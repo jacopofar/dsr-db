@@ -20,6 +20,8 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
+# to serve statically without that awful history manipulation
+routerMode: hash
 ---
 
 <style>
