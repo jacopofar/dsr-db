@@ -415,7 +415,8 @@ A few tips:
 
 * You can rent a domain name to map to your IP address
 * For testing, tools like `ngrok` or `bore` temporarily expose something local
- to a public address
+ to a public address. `Tailscale` is another option, suitable also for persistent
+ setups.
 * Many servers need to be **told** to listen on all available IPs. `0.0.0.0` is
  a "special" IP to indicate that every available interface is being used.
 * These details are for IPv4, IPv6 are still uncommon but the same principles
