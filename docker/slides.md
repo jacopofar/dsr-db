@@ -653,7 +653,7 @@ This requires:
 
 1. Getting an idea of how a general web app works
 2. Handling dependencies (NumPy)
-3. optional: Using venv to quickly test it without docker
+3. optional: Using venv/uv to quickly test it without docker
 4. Wrap everything inside a Dockerfile, build the image, and run the container
 
 ---
@@ -686,6 +686,8 @@ Requests are always initiated by the client, but it's possible to open a
 
 # Create a venv, install Flask
 
+We can use `venv` (but it's easier with uv)
+
 ```bash  {monaco}
 # create the venv
 python3 -m venv .venv
@@ -706,6 +708,18 @@ You can see the list of installed libraries with `python3 -m pip list`. This
 
 ---
 
+# Using uv in Docker
+
+You can use uv in Docker as well:
+
+`COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/`
+
+this will make uv available as a command in the image you are building.
+
+It copies UV from an existing image, and places it a folder that is
+usually in the PATH environment variable.
+
+---
 # A minimal Flask app
 
 In `minimal.py`:
